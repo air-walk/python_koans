@@ -17,6 +17,15 @@
 #   about_triangle_project_2.py
 #
 def triangle(a, b, c):
+    # Each side must be great than 0
+    if a <= 0 or b <=0 or c <= 0:
+        raise TriangleError
+
+    # Sum of any two sides must be greater than the third side
+    if a + b <= c or b + c <= a or c + a <= b:
+        raise TriangleError
+
+
     type = 'scalene'
 
     if a == b == c:
