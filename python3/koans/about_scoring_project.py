@@ -32,9 +32,40 @@ from runner.koan import *
 #
 # Your goal is to write the score method.
 
+def count_values_in_dict(dict_input):
+    num_count = {}
+    for num in dict_input:
+        try:
+            num_count[num] += 1
+        except KeyError:
+            num_count.setdefault(num, 1)
+
+    return num_count
+
+
 def score(dice):
-    # You need to write this method
-    pass
+    score     = 0
+    num_count = count_values_in_dict(dice)
+
+    # e.g. {1: 4, 5: 1}
+    for k, v in num_count.items():
+        if k == 1:
+            if v >= 3:
+                score += 1000
+                v -= 3
+
+            if v > 0:
+                score += v * 100
+        else:
+            if v >= 3:
+                score += 100 * k
+                v -= 3
+
+            if v > 0 and k == 5:
+                score += v * 50
+
+    return score
+
 
 class AboutScoringProject(Koan):
     def test_score_of_an_empty_list_is_zero(self):
